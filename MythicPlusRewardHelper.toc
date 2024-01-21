@@ -1,0 +1,8 @@
+## Interface: 100200
+## Title: Mythic Plus Reward Helper
+## Version: 0.0.1
+## Author: Dillon Louden
+## Notes: Add the end of dungeon and weekly vault reward ilvl to m+ key and LFG tooltip.
+## DefaultState: enabled
+
+Tooltip.lua
