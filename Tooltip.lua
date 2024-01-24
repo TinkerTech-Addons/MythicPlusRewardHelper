@@ -1,33 +1,24 @@
 local addonName, ns = ...
 
-local KEYSTONE_LEVEL_TO_DUNGEON_ILVL_REWARDS = { -- Table over keystone levels and the end of dungeon item level rewards for that keystone level.
-    [2] = 441,
-    [3] = 444,
-    [4] = 444,
-    [5] = 447,
-    [6] = 447,
-    [7] = 450,
-    [8] = 450,
-    [9] = 454,
-    [10] = 454,
-    [11] = 457,
-    [12] = 457,
-    [13] = 460,
-    [14] = 460,
-    [15] = 463,
-    [16] = 463,
-    [17] = 467,
-    [18] = 467,
-    [19] = 470,
-    [20] = 470
+local MYTHIC_PLUS_DUNGEONS = {
+    [1] = "Black Rock Hold",
+    [2] = "The Everbloom",
+    [3] = "Darkheart Thicket",
+    [4] = "Waycrest Manor",
+    [5] = "Atal'Dazar",
+    [6] = "Throne of the Tides",
+    [7] = "Dawn of the Infinite: Galakrond's Fall",
+    [8] = "Dawn of the Infinite: Murozond's Rise"
 }
 
--- Helper function to get end of dungeon item level from keystone level.
-function GetEndOfDungeonRewardIlvl(keystoneLevel)
-    if tonumber(keystoneLevel) > 20 then
-        keystoneLevel = 20
+-- Function to check if a value is in a table
+function IsInTable(value, tbl)
+    for _, v in ipairs(tbl) do
+        if v == value then
+            return true
+        end
     end
-    return KEYSTONE_LEVEL_TO_DUNGEON_ILVL_REWARDS[keystoneLevel]
+    return false
 end
 
 -- Keystone Tooltip
@@ -35,12 +26,11 @@ function OnKeystoneTooltip(tooltip, data)
     if string.match(data.lines[1].leftText, "Keystone:") then
         if tooltip == GameTooltip then
             local keystoneLevel = tonumber(string.sub(data.lines[2].leftText, 14, 16)) or 0
-            local greatVaultRewardIlvl = C_MythicPlus.GetRewardLevelFromKeystoneLevel(keystoneLevel)
-            local endOfDungeonIlvl = GetEndOfDungeonRewardIlvl(keystoneLevel)
+            local weeklyRewardLevel, endOfRunRewardLevel = C_MythicPlus.GetRewardLevelForDifficultyLevel(keystoneLevel)
 
             tooltip:AddLine(" ")
-            tooltip:AddDoubleLine("End of Dungeon Reward ilvl", endOfDungeonIlvl, 1, 0.85, 0, 1, 1, 1)
-            tooltip:AddDoubleLine("Great Vault Reward ilvl", greatVaultRewardIlvl, 1, 0.85, 0, 1, 1, 1)
+            tooltip:AddDoubleLine("End of Dungeon Reward ilvl", endOfRunRewardLevel, 1, 0.85, 0, 1, 1, 1)
+            tooltip:AddDoubleLine("Great Vault Reward ilvl", weeklyRewardLevel, 1, 0.85, 0, 1, 1, 1)
         end
     end
 end
@@ -48,8 +38,13 @@ end
 -- LFG Tooltip
 function UpdatePremadeGroupsTooltip(tooltip, data)
     local searchResultData = C_LFGList.GetSearchResultInfo(data)
-    print(searchResultData["name"])
-    tooltip:AddLine("TESTING 123!@#", "ABC", 1, 0.85, 0, 1, 1, 1)
+    local leaderDungeonScoreInfo = searchResultData["leaderDungeonScoreInfo"]
+    if leaderDungeonScoreInfo ~= nil and leaderDungeonScoreInfo["mapName"] ~= "" and IsInTable(leaderDungeonScoreInfo["mapName"], MYTHIC_PLUS_DUNGEONS) then
+        -- print(leaderDungeonScoreInfo["mapName"])
+        DevTools_Dump(leaderDungeonScoreInfo)
+        print(searchResultData["name"])
+        tooltip:AddLine("TESTING 123!@#", "ABC", 1, 0.85, 0, 1, 1, 1)
+    end
 end
 
 local addonData = {
