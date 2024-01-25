@@ -41,9 +41,18 @@ function UpdatePremadeGroupsTooltip(tooltip, data)
     local leaderDungeonScoreInfo = searchResultData["leaderDungeonScoreInfo"]
     if leaderDungeonScoreInfo ~= nil and leaderDungeonScoreInfo["mapName"] ~= "" and IsInTable(leaderDungeonScoreInfo["mapName"], MYTHIC_PLUS_DUNGEONS) then
         -- print(leaderDungeonScoreInfo["mapName"])
-        DevTools_Dump(leaderDungeonScoreInfo)
+        local keystoneLevel = tonumber(string.match(searchResultData["name"], "[1-9][0-9]*")) or 0
+        local weeklyRewardLevel, endOfRunRewardLevel = C_MythicPlus.GetRewardLevelForDifficultyLevel(keystoneLevel)
         print(searchResultData["name"])
-        tooltip:AddLine("TESTING 123!@#", "ABC", 1, 0.85, 0, 1, 1, 1)
+        print(keystoneLevel)
+
+        tooltip:AddLine(" ")
+        tooltip:AddDoubleLine("End of Dungeon Reward ilvl", endOfRunRewardLevel, 1, 0.85, 0, 1, 1, 1)
+        tooltip:AddDoubleLine("Great Vault Reward ilvl", weeklyRewardLevel, 1, 0.85, 0, 1, 1, 1)
+
+        -- DevTools_Dump(leaderDungeonScoreInfo)
+        -- print(searchResultData["name"])
+        -- tooltip:AddLine("TESTING 123!@#", "ABC", 1, 0.85, 0, 1, 1, 1)
     end
 end
 
