@@ -11,6 +11,17 @@ local MYTHIC_PLUS_DUNGEONS = {
     [8] = "Dawn of the Infinite: Murozond's Rise"
 }
 
+local MYTHIC_PLUS_REWARDS_TABLE = {}
+
+-- Function to dynamically create the Mythic Plus Reward Table.
+function BuildMythicPlusRewardTable()
+    table.insert(MYTHIC_PLUS_REWARDS_TABLE, {"Keystone Level", "End of Dungeon Item Level", "Great Vault Item Level"})
+    for i=2, 20 do
+        local weeklyRewardLevel, endOfRunRewardLevel = C_MythicPlus.GetRewardLevelForDifficultyLevel(i)
+        table.insert(MYTHIC_PLUS_REWARDS_TABLE, {i, endOfRunRewardLevel, weeklyRewardLevel})
+    end
+end
+
 -- Function to check if a value is in a table
 function IsInTable(value, tbl)
     for _, v in ipairs(tbl) do
@@ -31,16 +42,9 @@ function OnKeystoneTooltip(tooltip, data)
             tooltip:AddLine(" ")
             tooltip:AddDoubleLine("End of Dungeon Reward ilvl", endOfRunRewardLevel, 1, 0.85, 0, 1, 1, 1)
             tooltip:AddDoubleLine("Great Vault Reward ilvl", weeklyRewardLevel, 1, 0.85, 0, 1, 1, 1)
-            
         end
     end
 end
-
--- LFG Tooltip
--- function GetKeystoneInfo(unitId)
---     local unitName = GetUnitName(unitId, true) or unitId
---     return KeystoneInfoManager.GetKeystoneInfo(unitName)
--- end
 
 function UpdatePremadeGroupsTooltip(tooltip, data)
     local searchResultData = C_LFGList.GetSearchResultInfo(data)
@@ -75,6 +79,8 @@ SavedVariables = SavedVariables or addonData
 
 -- Event handler thats triggers when the addon has finished loading and based on the SavedVariables, changes values
 local function OnAddonLoaded(self, event)
+    BuildMythicPlusRewardTable()
+    DevTools_Dump(MYTHIC_PLUS_REWARDS_TABLE)
     if addonName == "MythicPlusRewardHelper" then
 
         -- Check if SavedVariables exist, if it does not, the default data will be saved
