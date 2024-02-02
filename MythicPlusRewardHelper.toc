@@ -4,5 +4,10 @@
 ## Author: Dillon Louden
 ## Notes: Add the end of dungeon and weekly vault reward ilvl to m+ key and LFG tooltip.
 ## DefaultState: enabled
+## SavedVariables: MPRH_SETTINGS
 
-Tooltip.lua
+# Tooltip.lua
+MythicPlusRewardHelper.lua
+MPRH-Settings.lua
+MPRH-KeystoneTooltip.lua
+MPRH-DungeonFinder.lua

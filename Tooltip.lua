@@ -12,6 +12,10 @@ local MYTHIC_PLUS_DUNGEONS = {
 }
 
 local MYTHIC_PLUS_REWARDS_TABLE = {}
+local LFG_FRAME = CreateFrame("Frame", "LFGDungeonFrame", UIParent)
+LFG_FRAME:SetSize(350, 400)
+LFG_FRAME:SetPoint("CENTER")
+LFG_FRAME:Hide()
 
 -- Function to dynamically create the Mythic Plus Reward Table.
 function BuildMythicPlusRewardTable()
@@ -40,8 +44,8 @@ function OnKeystoneTooltip(tooltip, data)
             local weeklyRewardLevel, endOfRunRewardLevel = C_MythicPlus.GetRewardLevelForDifficultyLevel(keystoneLevel)
 
             tooltip:AddLine(" ")
-            tooltip:AddDoubleLine("End of Dungeon Reward ilvl", endOfRunRewardLevel, 1, 0.85, 0, 1, 1, 1)
-            tooltip:AddDoubleLine("Great Vault Reward ilvl", weeklyRewardLevel, 1, 0.85, 0, 1, 1, 1)
+            tooltip:AddDoubleLine("ABC End of Dungeon Reward ilvl", endOfRunRewardLevel, 1, 0.85, 0, 1, 1, 1)
+            tooltip:AddDoubleLine("ABC Great Vault Reward ilvl", weeklyRewardLevel, 1, 0.85, 0, 1, 1, 1)
         end
     end
 end
@@ -54,10 +58,11 @@ function UpdatePremadeGroupsTooltip(tooltip, data)
         --     local keystoneLevel = unitKeystoneInfo.level
         --     DevTools_Dump(keystoneLevel)
         -- end
+        LFG_FRAME:Show()
 
-        tooltip:AddLine(" ")
-        tooltip:AddDoubleLine("End of Dungeon Reward ilvl", endOfRunRewardLevel, 1, 0.85, 0, 1, 1, 1)
-        tooltip:AddDoubleLine("Great Vault Reward ilvl", weeklyRewardLevel, 1, 0.85, 0, 1, 1, 1)
+        -- tooltip:AddLine(" ")
+        -- tooltip:AddDoubleLine("End of Dungeon Reward ilvl", endOfRunRewardLevel, 1, 0.85, 0, 1, 1, 1)
+        -- tooltip:AddDoubleLine("Great Vault Reward ilvl", weeklyRewardLevel, 1, 0.85, 0, 1, 1, 1)
     end
 end
 
@@ -79,12 +84,11 @@ SavedVariables = SavedVariables or addonData
 
 -- Event handler thats triggers when the addon has finished loading and based on the SavedVariables, changes values
 local function OnAddonLoaded(self, event)
-    BuildMythicPlusRewardTable()
-    DevTools_Dump(MYTHIC_PLUS_REWARDS_TABLE)
     if addonName == "MythicPlusRewardHelper" then
 
         -- Check if SavedVariables exist, if it does not, the default data will be saved
         SavedVariables = SavedVariables or addonData
+        BuildMythicPlusRewardTable()
 
         if not SavedVariables.tooltipHidden then
             TooltipDataProcessor.AddTooltipPostCall(Enum.TooltipDataType.Item, OnKeystoneTooltip)
