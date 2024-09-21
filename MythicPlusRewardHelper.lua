@@ -30,9 +30,3 @@ SLASH_MYTHICPLUSREWARDHELPER1 = '/mpr'
 SLASH_MYTHICPLUSREWARDHELPER2 = '/mprh'
 SLASH_MYTHICPLUSREWARDHELPER3 = '/mythicplusrewardhelper'
 SlashCmdList['MYTHICPLUSREWARDHELPER'] = SlashCommandHandler
-
--- helper functions (should be moved)
--- Function to log addon message
-function ns.SendAddonLogMessage(message)
-    C_ChatInfo.SendAddonMessageLogged("MPRH-", message, "WHISPER", UnitName("player"))
-end

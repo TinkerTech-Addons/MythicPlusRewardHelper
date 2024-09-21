@@ -37,16 +37,19 @@ displayHeader:SetText("Display Options")
 
 -- Create display rewards on keystone checkbox option
 local keystoneDisplayCheckbox = CreateFrame("CheckButton", "MPRH-KeystoneDisplay", frame, "UICheckButtonTemplate")
-local keystoneDisplayCheckboxText = keystoneDisplayCheckbox:CreateFontString("MPRH-KeystoneDisplayText", "HIGHLIGHT", "GameFontHighlightMed2")
+local keystoneDisplayCheckboxText = keystoneDisplayCheckbox:CreateFontString("MPRH-KeystoneDisplayText", "HIGHLIGHT",
+    "GameFontHighlightMed2")
 keystoneDisplayCheckboxText:SetText("Show Reward Item Level on Keystone Item Tooltip")
 keystoneDisplayCheckboxText:SetPoint("LEFT", 30, 0)
 keystoneDisplayCheckbox:SetSize(30, 30)
 keystoneDisplayCheckbox:SetPoint("TOPLEFT", frame, "TOPLEFT", 25, -65)
 keystoneDisplayCheckbox:SetFontString(keystoneDisplayCheckboxText)
+
 keystoneDisplayCheckbox:SetScript("OnClick", function(self)
     ns.ToggleKeystoneDisplay(self:GetChecked())
     ns.SendAddonLogMessage("Display Settings Changed - Keystone")
 end)
+
 function ns.ToggleKeystoneDisplay(checked)
     if checked then
         MPRH_SETTINGS["KeystoneDisplayEnabled"] = true
@@ -79,13 +82,10 @@ function ns.OnInitialize()
     end
 
     TooltipDataProcessor.AddTooltipPostCall(Enum.TooltipDataType.Item, ns.OnKeystoneTooltip)
-    hooksecurefunc("LFGListUtil_SetSearchEntryTooltip", ns.UpdatePremadeGroupsTooltip)
 end
 
 -- Register events
 frame:RegisterEvent("ADDON_LOADED")
-frame:RegisterEvent("PLAYER_LOGIN")
-frame:RegisterEvent("CHAT_MSG_ADDON_LOGGED")
 
 -- Handle events
 frame:SetScript("OnEvent", function(_, event, arg1, arg2)
@@ -93,12 +93,4 @@ frame:SetScript("OnEvent", function(_, event, arg1, arg2)
         ns.successfulRequest = C_ChatInfo.RegisterAddonMessagePrefix("MPRH-")
         ns.OnInitialize()
     end
-
-    if event == "PLAYER_LOGIN" then
-        ns.BuildMythicPlusRewardTable()
-    end
-
-    -- if event == "CHAT_MSG_ADDON_LOGGED" and arg1 == "MPRH-" then
-        
-    -- end
 end)
