@@ -2,8 +2,6 @@ name: Release MythicPlusRewardHelper AddOn
 
 on:
   push:
-    branches:
-      - main
     tags:
       - "v*"
 
