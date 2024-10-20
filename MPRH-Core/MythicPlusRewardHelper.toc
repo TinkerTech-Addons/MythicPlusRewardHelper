@@ -1,0 +1,20 @@
+## Interface: 110002
+## Title: Mythic Plus Reward Helper
+## Version: 0.0.1
+## X-BuildDate: 2024-10-17
+## Author: TinkerTech Addons
+## AddonCompartmentFunc: MPRH_OnAddonCompartmentClick
+## AddonCompartmentFuncOnEnter: MPRH_OnAddonCompartmentEnter
+## AddonCompartmentFuncOnLeave: MPRH_OnAddonCompartmentLeave
+## Notes: Tooltip information to quicky see what item level gear can be given for end of dungenon and great vault after a Mythic Plus completion.
+## DefaultState: enabled
+## SavedVariables: MPRH_Settings
+## IconTexture: Interface/AddOns/MythicPlusRewardHelper/Media/Textures/MythicPlusRewardHelper-logo
+
+## X-Curse-Project-ID: 0
+
+# Tooltip.lua
+MythicPlusRewardHelper.lua
+MPRH-Settings.lua
+MPRH-KeystoneTooltip.lua
+MPRH-DungeonFinder.lua
