@@ -15,7 +15,7 @@ settingsFrame:SetPoint("CENTER", 0, 150)
 settingsFrame:SetMovable(true)
 settingsFrame:EnableMouse(true)
 settingsFrame:SetFrameStrata("DIALOG")
-settingsFrame:SetSize(375, 400)
+settingsFrame:SetSize(275, 300)
 --#endregion
 
 --#region Settings frame scripts that allow it to be movable
@@ -40,8 +40,8 @@ title:SetText("Mythic Plus Reward Helper Settings")
 
 --#region Create and display the settings frame short description
 local description = settingsFrame:CreateFontString("settingsFrameDescription", "OVERLAY", "GameFontHighlightMed2")
-description:SetPoint("TOP", 15, -40)
-description:SetSize(325, 0)
+description:SetPoint("TOP", 10, -40)
+description:SetSize(225, 0)
 description:SetWordWrap(true)
 description:SetText("Toggle on/off MythicPlusRewardHelper settings")
 description:SetJustifyH("LEFT")
@@ -94,7 +94,7 @@ end
 
 --#region Namespace on initialize addon function
 function ns.OnInitialize()
-    local generalSettings = createSettingHeader("Keystone Tooltip Settings", "TOPLEFT", 17, -84)
+    local generalSettings = createSettingHeader("Keystone Tooltip Settings", "TOPLEFT", -15, -84)
     local rewardItemLevel = createSettingCheckbox("Reward Item Level", settingsFrame, "TOPLEFT", 35, -114)
     local upgradeTrack = createSettingCheckbox("Item Upgrade Track", rewardItemLevel, "LEFT", 0, -30)
     local upgradeCrestAwarded = createSettingCheckbox("Crest Type Awarded", upgradeTrack, "LEFT", 0, -30)
