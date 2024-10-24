@@ -96,6 +96,8 @@ end
 function ns.OnInitialize()
     local generalSettings = createSettingHeader("Keystone Tooltip Settings", "TOPLEFT", 17, -84)
     local rewardItemLevel = createSettingCheckbox("Reward Item Level", settingsFrame, "TOPLEFT", 35, -114)
+    local upgradeTrack = createSettingCheckbox("Item Upgrade Track", rewardItemLevel, "LEFT", 0, -30)
+    local upgradeCrestAwarded = createSettingCheckbox("Crest Type Awarded", upgradeTrack, "LEFT", 0, -30)
 end
 
 --#endregion

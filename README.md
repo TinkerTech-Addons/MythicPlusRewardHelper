@@ -14,7 +14,7 @@
 <div align="center">
   <br />
   <a href="">
-    <img src="images/logos/MythicPlusRewardHelper-logo.jpeg" alt="Mythic Plus Reward Helper logo" width="150" height="120">
+    <img src="images/logos/MythicPlusRewardHelper-logo.jpeg" alt="Mythic Plus Reward Helper logo" width="150" height="150">
   </a>
   <p align="center">
     A World of Warcraft Retail addon that visually helps players see the reward item level for Mythic+ completion and great vault rewards
