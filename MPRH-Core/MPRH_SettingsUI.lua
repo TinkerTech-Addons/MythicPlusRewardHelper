@@ -1,6 +1,7 @@
 -- MPRH-SettingsUI.lua
+-- Handles the creation and functionality of the settings UI.
 
---#region Create locally and globaly used variables
+--#region Create locally and globally used variables
 local addonName, ns = ...
 
 if not MPRH_Settings then
@@ -8,44 +9,25 @@ if not MPRH_Settings then
 end
 --#endregion
 
---#region Create base settings frame
-local settingsFrame = CreateFrame("Frame", "MPRH Settings", UIParent, "BasicFrameTemplate")
-settingsFrame:Hide()
+--#region Create and configure the settings frame
+local settingsFrame = CreateFrame("Frame", "MPRHSettings", UIParent, "BasicFrameTemplate")
+settingsFrame:SetSize(275, 300)
 settingsFrame:SetPoint("CENTER", 0, 150)
 settingsFrame:SetMovable(true)
 settingsFrame:EnableMouse(true)
 settingsFrame:SetFrameStrata("DIALOG")
-settingsFrame:SetSize(275, 300)
+settingsFrame:Hide()
 --#endregion
 
---#region Settings frame scripts that allow it to be movable
-settingsFrame:SetScript("OnMouseUp", function(self, button)
-    if button == "LeftButton" then
-        self:StartMoving()
-    end
-end)
-
-settingsFrame:SetScript("OnMouseUp", function(self, button)
-    if button == "LeftButton" then
-        self:StopMoving()
-    end
-end)
---#endregion
-
---#region Create and display the settings frame title
+-- Create and configure the settings frame title text
 local title = settingsFrame:CreateFontString("settingsFrameTitle", "OVERLAY", "GameFontHighlightMed2")
-title:SetPoint("TOP", settingsFrame, 0, -4)
-title:SetText("Mythic Plus Reward Helper Settings")
---#endregion
+title:SetPoint("TOPLEFT", settingsFrame, 20, -5)
+title:SetText("|cEBA0FCFFMythic Plus Reward Helper|r Settings")
 
---#region Create and display the settings frame short description
-local description = settingsFrame:CreateFontString("settingsFrameDescription", "OVERLAY", "GameFontHighlightMed2")
-description:SetPoint("TOP", 10, -40)
-description:SetSize(225, 0)
-description:SetWordWrap(true)
-description:SetText("Toggle on/off MythicPlusRewardHelper settings")
-description:SetJustifyH("LEFT")
---#endregion
+-- Create and configure the settings frame version text
+local version = settingsFrame:CreateFontString(nil, "OVERLAY", "GameFontHighlightMed2")
+version:SetPoint("TOPRIGHT", settingsFrame, -35, -5)
+version:SetText(ns.addonVersion)
 
 --#region Local function to load saved settings
 local function loadCheckboxSetting(checkbox, settingName)
@@ -57,7 +39,8 @@ end
 --#endregion
 
 --#region Local function to handle checkbox clicks
-local function onCheckboxClick(self, settingName)
+local function onCheckboxClick(self, checkboxSettingName)
+    local settingName = checkboxSettingName
     MPRH_Settings[settingName] = self:GetChecked()
     ns.loadSettings()
 end

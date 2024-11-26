@@ -42,10 +42,10 @@ end
 
 -- Function to dynamically create the Mythic Plus Reward Table.
 function ns.BuildMythicPlusRewardTable()
-    table.insert(MYTHIC_PLUS_REWARDS_TABLE, {"Keystone Level", "End of Dungeon Item Level", "Great Vault Item Level"})
-    for i=2, 20 do
+    table.insert(MYTHIC_PLUS_REWARDS_TABLE, { "Keystone Level", "End of Dungeon Item Level", "Great Vault Item Level" })
+    for i = 2, 20 do
         local weeklyRewardLevel, endOfRunRewardLevel = C_MythicPlus.GetRewardLevelForDifficultyLevel(i)
-        table.insert(MYTHIC_PLUS_REWARDS_TABLE, {i, endOfRunRewardLevel, weeklyRewardLevel})
+        table.insert(MYTHIC_PLUS_REWARDS_TABLE, { i, endOfRunRewardLevel, weeklyRewardLevel })
     end
 end
 
