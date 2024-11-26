@@ -31,6 +31,11 @@ Mythic Plus Reward Helper (MPRH) is a lightweight and customizable, Mythic+ comp
 
 World of Warcraft (WoW) retail recently added gear progression tracks along with the weekly great vault and end of Mythic+ dungeon rewards. Depending on the Mythic+ keystone level these rewards can vary greatly with item level and gear progression track.
 
+## Resources
+
+- https://www.wowhead.com/guide/mythic-plus-dungeons/the-war-within-season-1/overview
+- https://warcraft.wiki.gg/wiki/Enum.ItemQuality
+
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 
