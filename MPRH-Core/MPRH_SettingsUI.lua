@@ -11,7 +11,7 @@ end
 
 --#region Create and configure the settings frame
 local settingsFrame = CreateFrame("Frame", "MPRHSettings", UIParent, "BasicFrameTemplate")
-settingsFrame:SetSize(275, 300)
+settingsFrame:SetSize(400, 300)
 settingsFrame:SetPoint("CENTER", 0, 150)
 settingsFrame:SetMovable(true)
 settingsFrame:EnableMouse(true)

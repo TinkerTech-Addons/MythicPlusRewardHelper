@@ -20,9 +20,12 @@ local function SlashCommandHandler(message)
     elseif message == "show" then
         ns.ShowSettingsFrame()
     else
-        print("|cFF38CBFEIcy|r|cFFFF8F00BIS|r Usage:")
-        print("  /|cFF38CBFEicy|r|cFFFF8F00bis|r |cFF14cd33show|r      - Open the settings")
-        print("  /|cFF38CBFEicy|r|cFFFF8F00bis|r |cFF14cd33v|version|r - Print out the addon name and current version")
+        print("Mythic Plus Reward Helper Usage:")
+        print("  /mythicplusrewardhelper |cFF14cd33show|r      - Open the settings")
+        print("  /mythicplusrewardhelper |cFF14cd33v|version|r - Print out the addon name and current version")
+        print("Shorthand Slash Commands:")
+        print("  /mpr")
+        print("  /mprh")
     end
 end
 --#endregion

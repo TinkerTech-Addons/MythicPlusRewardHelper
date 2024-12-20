@@ -2,30 +2,6 @@
 
 -- Create localy used variables
 local addonName, ns = ...
-local seasonID = C_MythicPlus.GetCurrentSeason()
-local MYTHIC_PLUS_DUNGEONS = {
-    [1] = "Black Rock Hold",
-    [2] = "The Everbloom",
-    [3] = "Darkheart Thicket",
-    [4] = "Waycrest Manor",
-    [5] = "Atal'Dazar",
-    [6] = "Throne of the Tides",
-    [7] = "Dawn of the Infinite: Galakrond's Fall",
-    [8] = "Dawn of the Infinite: Murozond's Rise"
-}
-local MYTHIC_PLUS_SEASON_MAP = {
-    [1] = "Battle for Azeroth Season 1",
-    [2] = "Battle for Azeroth Season 2",
-    [3] = "Battle for Azeroth Season 3",
-    [4] = "Battle for Azeroth Season 4",
-    [5] = "Shadowlands Season 1",
-    [6] = "Shadowlands Season 2",
-    [7] = "Shadowlands Season 3",
-    [8] = "Shadowlands Season 4",
-    [9] = "Dragonflight Season 1",
-    [10] = "Dragonflight Season 2",
-    [11] = "Dragonflight Season 3"
-}
 
 -- Create and configure Mythic Plus Reward table frame
 local frame = CreateFrame("GameTooltip", "MPRH-LFGDungeonRewardFrame", UIParent, "GameTooltipTemplate")
