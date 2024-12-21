@@ -1,28 +1,25 @@
 -- MPRH.lua (MythicPlusRewardHelper)
 -- Handles the main functionality of the MythicPlusRewardHelper WoW Addon.
 
---#region Create locally and globaly used variables
+--#region Create locally and globally used variables
 local addonName, ns = ...
 ns = ns or {}
 ns.addonVersion = C_AddOns.GetAddOnMetadata(addonName, "Version")
 ns.buildDate = C_AddOns.GetAddOnMetadata(addonName, "X-BuildDate")
 
--- Table to hold account saved settings
-MPRH_Settings = MPRH_Settings or {}
---#endregion
-
 --#region Local slash command handler function.
 local function SlashCommandHandler(message)
     if message == "v" or message == "version" then
-        print("Addon Name: " .. addonName)
+        print("Addon Name: " .. "|cDBB670FFMythic Plus Reward Helper|r")
         print("   Version: " .. ns.addonVersion)
         print("Build Date: " .. ns.buildDate)
-    elseif message == "show" then
-        ns.ShowSettingsFrame()
+    elseif tonumber(message) then
+        ns.buildSlashInfo(tonumber(message))
     else
-        print("Mythic Plus Reward Helper Usage:")
-        print("  /mythicplusrewardhelper |cFF14cd33show|r      - Open the settings")
+        print("|cDBB670FFMythic Plus Reward Helper|r Usage:")
         print("  /mythicplusrewardhelper |cFF14cd33v|version|r - Print out the addon name and current version")
+        print(
+            "  /mythicplusrewardhelper |cFF14cd33<keystone level>|r - Print Mythic Plush Reward Helper information for the supplied keystone level")
         print("Shorthand Slash Commands:")
         print("  /mpr")
         print("  /mprh")
@@ -39,13 +36,10 @@ SlashCmdList["MYTHICPLUSREWARDHELPER"] = SlashCommandHandler
 
 --#region Local on addon loaded event handler function
 local function OnAddonLoaded(self, event)
-    if event == "PLAYER_ENTERING_WORLD" then
-        ns.OnInitialize()
-    end
-
-    if event == "ADDON_LOADED" and addonName == "mythicplusrewardhelper" then
-        print("Loaded MythicPlusRewardHelper")
-        print("   Version: " .. ns.addonVersion)
+    if event == "ADDON_LOADED" and addonName == "MythicPlusRewardHelper" then
+        print("-----------------------------------")
+        print("|cDBB670FFMythic Plus Reward Helper|r")
+        print("Version: " .. ns.addonVersion)
         print("Build Date: " .. ns.buildDate)
         TooltipDataProcessor.AddTooltipPostCall(Enum.TooltipDataType.Item, ns.OnKeystoneTooltip)
 
@@ -57,6 +51,5 @@ end
 --#region Register the addon events and set the load script
 local frame = CreateFrame("Frame", "MythicPlusRewardHelper")
 frame:RegisterEvent("ADDON_LOADED")
-frame:RegisterEvent("PLAYER_ENTERING_WORLD")
 frame:SetScript("OnEvent", OnAddonLoaded)
 --#endregion

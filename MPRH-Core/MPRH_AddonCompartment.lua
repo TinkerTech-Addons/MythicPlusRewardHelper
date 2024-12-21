@@ -1,19 +1,14 @@
-local ns = ...
+local addonName, ns = ...
 
 function MPRH_OnAddonCompartmentClick()
-    if IsShiftKeyDown() then
-        ns.ToggleMythicPlusRewardHelperOnOff()
-    else
-        ns.ShowSettingsFrame()
-    end
+    return
 end
 
 function MPRH_OnAddonCompartmentEnter()
     GameTooltip:SetOwner(AddonCompartmentFrame, "ANCHOR_BOTTOMLEFT")
-    GameTooltip:AddDoubleLine(ns.addonName, "Version: " .. ns.addonVersion, 1, 0.8, 0, 1, 0.8, 0)
+    GameTooltip:AddDoubleLine("|cDBB670FFMythic Plus Reward Helper|r", "Version: " .. ns.addonVersion, 1, 0.8, 0, 1, 0.8,
+        0)
     GameTooltip:AddLine(" ")
-    GameTooltip:AddLine("Left-Click to toggle settings")
-    GameTooltip:AddLine("Shift Left-Click to toggle On/Off")
     GameTooltip:Show()
 end
 

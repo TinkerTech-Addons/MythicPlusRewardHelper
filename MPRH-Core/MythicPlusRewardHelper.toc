@@ -1,5 +1,5 @@
 ## Interface: 110007
-## Title: Mythic Plus Reward Helper
+## Title: |cDBB670FFMythic Plus Reward Helper|r
 ## Version: 0.0.1
 ## X-BuildDate: 2024-10-17
 ## Author: TinkerTech Addons
@@ -15,7 +15,6 @@
 
 MPRH_Variables.lua
 MythicPlusRewardHelper.lua
-MPRH_SettingsUI.lua
 MPRH_Functions.lua
 MPRH_Tooltip.lua
 MPRH_AddonCompartment.lua
