@@ -2,6 +2,10 @@
 
 local addonName, ns = ...
 
+ns.EXPANSION = "The War Within"
+
+ns.SEASON = "Season 1"
+
 ns.SEASON_MAX_KEYSTONE_LEVEL = 10
 
 ns.END_OF_DUNGEON_ITEM_LEVEL = {
