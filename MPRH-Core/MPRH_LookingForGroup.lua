@@ -50,6 +50,8 @@ local function CreateRow(parent, index, colData, isHeader)
       local col = row:CreateFontString(nil, "OVERLAY", isHeader and "GameFontNormalLarge" or "GameFontNormal")
       
       col:SetPoint("LEFT", (i - 1) * 105, 0) -- Adjust spacing as needed
+      col:SetWidth(99)
+      col:SetWordWrap(true)
       col:SetText(data)
    end
    

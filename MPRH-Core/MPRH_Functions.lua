@@ -19,7 +19,7 @@ function ns.buildTooltip(keystone_level, tooltip)
 
     tooltip:AddLine("|cDBB670FFMythic Plus Reward Helper|r")
     tooltip:AddLine("End of Dungeon: " .. EoD_Color .. keystone_data[1] .. " " .. keystone_data[3] .. "|r")
-    tooltip:AddLine("      Great Vault: " .. GV_Color .. keystone_data[4] .. "|r")
+    tooltip:AddLine("Great Vault: " .. GV_Color .. keystone_data[4] .. "|r")
 end
 
 function ns.buildSlashInfo(keystone_level)
@@ -43,7 +43,7 @@ function ns.buildSlashInfo(keystone_level)
         keystone_data[5].b * 255)
 
     print("|cDBB670FFMythic Plus Reward Helper|r")
-    print(" Keystone Level: " .. keystone_level)
-    print("End of Dungeon: " .. EoD_Color .. keystone_data[1] .. " " .. keystone_data[3] .. "|r")
-    print("      Great Vault: " .. GV_Color .. keystone_data[4] .. "|r")
+    print("|cFF14cd33Keystone Level:|r " .. keystone_level)
+    print("|cFF14cd33End of Dungeon:|r " .. EoD_Color .. keystone_data[1] .. " " .. keystone_data[3] .. "|r")
+    print("|cFF14cd33Great Vault:|r " .. GV_Color .. keystone_data[4] .. "|r")
 end
