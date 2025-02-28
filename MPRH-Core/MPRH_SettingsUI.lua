@@ -1,110 +1,48 @@
--- MPRH-SettingsUI.lua
+-- MPRH_SettingsUI.lua
+-- Handles the creation and functionality of the settings UI.
 
---#region Create locally and globaly used variables
+--#region Create locally and globally used variables.
 local addonName, ns = ...
-
-if not MPRH_Settings then
-    MPRH_Settings = {}
-end
 --#endregion
 
---#region Create base settings frame
-local settingsFrame = CreateFrame("Frame", "MPRH Settings", UIParent, "BasicFrameTemplate")
-settingsFrame:Hide()
+--#region Create and configure the settings frame.
+local settingsFrame = CreateFrame("Frame", "MPRHSettings", UIParent, "BasicFrameTemplate")
+settingsFrame:SetSize(450, 250)
 settingsFrame:SetPoint("CENTER", 0, 150)
 settingsFrame:SetMovable(true)
 settingsFrame:EnableMouse(true)
 settingsFrame:SetFrameStrata("DIALOG")
-settingsFrame:SetSize(275, 300)
+settingsFrame:Hide()
+
+-- Create and configure the settings frame title text.
+local title = settingsFrame:CreateFontString(nil, "OVERLAY", "GameFontHighlightMed2")
+title:SetPoint("TOPLEFT", settingsFrame, 20, -5)
+title:SetText("|cDBB670FFMythic Plus Reward Helper|r")
+
+-- Create and configure the settings frame version text.
+local version = settingsFrame:CreateFontString(nil, "OVERLAY", "GameFontHighlightMed2")
+version:SetPoint("TOPRIGHT", settingsFrame, -35, -5)
+version:SetText(ns.addonVersion)
 --#endregion
 
---#region Settings frame scripts that allow it to be movable
-settingsFrame:SetScript("OnMouseUp", function(self, button)
+--#region Create settingsFrame scripts.
+-- Allows the settingsFrame to be moved around
+settingsFrame:SetScript("OnMouseDown", function(self, button)
     if button == "LeftButton" then
         self:StartMoving()
     end
 end)
 
+-- Stops the settingsFrame from moving around
 settingsFrame:SetScript("OnMouseUp", function(self, button)
     if button == "LeftButton" then
-        self:StopMoving()
+        self:StopMovingOrSizing()
     end
 end)
 --#endregion
 
---#region Create and display the settings frame title
-local title = settingsFrame:CreateFontString("settingsFrameTitle", "OVERLAY", "GameFontHighlightMed2")
-title:SetPoint("TOP", settingsFrame, 0, -4)
-title:SetText("Mythic Plus Reward Helper Settings")
---#endregion
-
---#region Create and display the settings frame short description
-local description = settingsFrame:CreateFontString("settingsFrameDescription", "OVERLAY", "GameFontHighlightMed2")
-description:SetPoint("TOP", 10, -40)
-description:SetSize(225, 0)
-description:SetWordWrap(true)
-description:SetText("Toggle on/off MythicPlusRewardHelper settings")
-description:SetJustifyH("LEFT")
---#endregion
-
---#region Local function to load saved settings
-local function loadCheckboxSetting(checkbox, settingName)
-    if MPRH_Settings[settingName] == nil then
-        MPRH_Settings[settingName] = false
-    end
-    checkbox:SetChecked(MPRH_Settings[settingName])
-end
---#endregion
-
---#region Local function to handle checkbox clicks
-local function onCheckboxClick(self, settingName)
-    MPRH_Settings[settingName] = self:GetChecked()
-    ns.loadSettings()
-end
---#endregion
-
---#region Local function to create setting's headers
-local function createSettingHeader(name, anchorPoint, x, y)
-    local settingHeader = settingsFrame:CreateFontString("settingHeaderLabel", "OVERLAY", "GameFontHighlightLarge2")
-    settingHeader:SetText(name)
-    settingHeader:SetPoint(anchorPoint, x + 32, y - 5)
-end
---#endregion
-
---#region Local function to create setting's checkboxes
-local function createSettingCheckbox(name, parent, anchorPoint, x, y, checkboxSettingName)
-    local checkbox = CreateFrame("CheckButton", name, parent, "UICheckButtonTemplate")
-    checkbox:SetPoint(anchorPoint, x, y)
-
-    local checkboxLabel = checkbox:CreateFontString("checkboxLabel", "HIGHLIGHT", "GameFontHighlightMed2")
-    checkboxLabel:SetText(name)
-    checkboxLabel:SetPoint("LEFT", 35, 0)
-
-    checkbox:SetFontString(checkboxLabel)
-
-    loadCheckboxSetting(checkbox, checkboxSettingName)
-
-    checkbox:SetScript("OnClick", function(self)
-        onCheckboxClick(self, checkboxSettingName)
-    end)
-
-    return checkbox
-end
---#endregion
-
---#region Namespace on initialize addon function
-function ns.OnInitialize()
-    local generalSettings = createSettingHeader("Keystone Tooltip Settings", "TOPLEFT", -15, -84)
-    local rewardItemLevel = createSettingCheckbox("Reward Item Level", settingsFrame, "TOPLEFT", 35, -114)
-    local upgradeTrack = createSettingCheckbox("Item Upgrade Track", rewardItemLevel, "LEFT", 0, -30)
-    local upgradeCrestAwarded = createSettingCheckbox("Crest Type Awarded", upgradeTrack, "LEFT", 0, -30)
-end
-
---#endregion
-
---#region Namespace show settings frame function
+--#region Create a namespace function to show the settingFrame.
 function ns.ShowSettingsFrame()
     settingsFrame:Show()
 end
-
 --#endregion
