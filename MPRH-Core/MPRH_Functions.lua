@@ -46,6 +46,6 @@ function ns.buildSlashInfo(keystone_level)
     print("|cDBB670FFMythic Plus Reward Helper|r")
     print("|cFF14cd33Keystone Level:|r " .. keystone_level)
     print("|cFF14cd33End of Dungeon:|r " ..
-        EoD_Color .. keystone_data[1] .. " " .. keystone_data[3] .. "x" .. keystone_data[4] .. "|r")
+        EoD_Color .. keystone_data[1] .. " " .. keystone_data[3] .. " x " .. keystone_data[4] .. "|r")
     print("|cFF14cd33Great Vault:|r " .. GV_Color .. keystone_data[5] .. "|r")
 end
